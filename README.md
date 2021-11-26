@@ -38,7 +38,7 @@ What’s a Seq2Seq Model?
 
 A Seq2Seq model is a model that takes a sequence of items (words, letters, time series, etc) and outputs another sequence of items.
 
-![](Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.001.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images/Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.001.png)
 
 Seq2Seq Model
 
