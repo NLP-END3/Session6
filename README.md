@@ -46,11 +46,11 @@ In the case of Neural Machine Translation, the input is a series of words, and t
 
 Now let's work on reducing the blackness of our black box. The model is composed of an *encoder* and a *decoder*. The encoder captures the *context* of the input sequence in the form of a *hidden state vector* and sends it to the decoder, which then produces the output sequence. Since the task is sequence based, both the encoder and decoder tend to use some form of RNNs, LSTMs, GRUs, etc. The hidden state vector can be of any size, though in most cases, it's taken as a [power of 2](https://datascience.stackexchange.com/questions/16416/why-the-number-of-neurons-or-convolutions-chosen-equal-powers-of-two) and a large number (256, 512, 1024) which can in some way represent the complexity of the complete sequence as well as the domain.
 
-![](Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.002.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images/Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.002.png)
 
 Let’s go Deeper! RNNs!
 
-![](Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.003.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images/Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.003.png)
 
 RNN Cell
 
@@ -58,7 +58,7 @@ RNNs by design, take two inputs, the current example they see, and a representat
 
 The Encoder, consisting of RNNs, takes the sequence as an input and generates a final embedding at the end of the sequence. This is then sent to the Decoder, which then uses it to predict a sequence, and after every successive prediction, it uses the previous hidden state to predict the next instance of the sequence.
 
-![](Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.004.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images/Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.004.png)
 
 Encoder-Decoder Model for Seq2Seq Modelling
 
@@ -70,7 +70,7 @@ Now I’m getting your ATTENTION! ;P
 
 To put it in very simple terms, since the issue was that a single hidden state vector at the end of the encoder wasn’t enough, we send as many hidden state vectors as the number of instances in the input sequence. So here is the new representation:
 
-![](Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.005.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images/Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.005.png)
 
 Seq2Seq with Attention — incomplete
 
@@ -78,7 +78,7 @@ Well, that sounds pretty simple, doesn’t it? Let’s bring in some more comple
 
 Another valuable addition to creating the Attention based model is the *context vector*. This is generated for every time instance in the output sequences. At every step, the context vector is a weighted sum of the input hidden states as given below:
 
-![](Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.006.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.006.png)
 
 Context Vector
 
@@ -86,7 +86,7 @@ But how is the context vector used in the prediction? And how are the weights *
 
 The generated context vector is combined with the hidden state vector by concatenation and this new *attention hidden vector* is used for predicting the output at that time instance. Note that this attention vector is generated for every time instance in the output sequence and now replaces the hidden state vector.
 
-![](Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.007.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.007.png)
 
 Attention hidden state
 
@@ -94,25 +94,25 @@ Now we get to the final piece of the puzzle, the attention scores.
 
 Again, in simple terms, these are the output of another neural network model, the *alignment model*, which is trained jointly with the seq2seq model initially. The alignment model scores how well an input (represented by its hidden state) matches with the previous output (represented by attention hidden state) and does this matching for every input with the previous output. Then a softmax is taken over all these scores and the resulting number is the attention score for each input.
 
-![](Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.008.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.008.png)
 
 Attention scoring
 
 Hence, we now know which part of the input is most important for the prediction of each of the instances in the output sequence. In the training phase, the model has learned how to align various instances from the output sequence to the input sequence. Below is an illustrated example of a machine translation model, shown in a matrix form. Note that each of the entries in the matrix is the attention score associated with the input and the output sequence.
 
-![](Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.009.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.009.png)
 
 French to English conversion. Notice how the model weighted the input sequence while outputing European Economic Area”
 
 So now we have the final and complete model
 
-![](Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.010.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.010.png)
 
 Seq2Seq Attention Based Model
 
 As we can see, the black box that we started with, has now turned white. Below is a pictorial summarization:
 
-![](Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.011.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.011.png)
 
-![](Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.012.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.012.png)
 
