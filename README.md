@@ -78,7 +78,7 @@ Well, that sounds pretty simple, doesn’t it? Let’s bring in some more comple
 
 Another valuable addition to creating the Attention based model is the *context vector*. This is generated for every time instance in the output sequences. At every step, the context vector is a weighted sum of the input hidden states as given below:
 
-![](https://github.com/NLP-END3/Session6/blob/main/Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.006.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images/Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.006.png)
 
 Context Vector
 
@@ -86,7 +86,7 @@ But how is the context vector used in the prediction? And how are the weights *
 
 The generated context vector is combined with the hidden state vector by concatenation and this new *attention hidden vector* is used for predicting the output at that time instance. Note that this attention vector is generated for every time instance in the output sequence and now replaces the hidden state vector.
 
-![](https://github.com/NLP-END3/Session6/blob/main/Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.007.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images/Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.007.png)
 
 Attention hidden state
 
@@ -94,7 +94,7 @@ Now we get to the final piece of the puzzle, the attention scores.
 
 Again, in simple terms, these are the output of another neural network model, the *alignment model*, which is trained jointly with the seq2seq model initially. The alignment model scores how well an input (represented by its hidden state) matches with the previous output (represented by attention hidden state) and does this matching for every input with the previous output. Then a softmax is taken over all these scores and the resulting number is the attention score for each input.
 
-![](https://github.com/NLP-END3/Session6/blob/main/Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.008.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images/Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.008.png)
 
 Attention scoring
 
@@ -106,13 +106,13 @@ French to English conversion. Notice how the model weighted the input sequence w
 
 So now we have the final and complete model
 
-![](https://github.com/NLP-END3/Session6/blob/main/Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.010.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images/Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.010.png)
 
 Seq2Seq Attention Based Model
 
 As we can see, the black box that we started with, has now turned white. Below is a pictorial summarization:
 
-![](https://github.com/NLP-END3/Session6/blob/main/Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.011.png)
+![](https://github.com/NLP-END3/Session6/blob/main/Images/Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.011.png)
 
 ![](https://github.com/NLP-END3/Session6/blob/main/Images\Aspose.Words.8686f41a-49b8-4e06-8996-2e77be4aa837.012.png)
 
