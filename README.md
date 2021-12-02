@@ -1,6 +1,8 @@
 # Session6
 The School of AI - END3 Course, Session 6 Assignment
 
+*Group Members: Dhruba Adhikary, Phani Nandula, Prateek Maheshwari, Sujit Ojha*
+
 ## 1. Assignment (300 points):
 - Train model we wrote in the class on the following two datasets taken from this [link](https://kili-technology.com/blog/chatbot-training-datasets/): 
     - http://www.cs.cmu.edu/~ark/QA-data/ 
