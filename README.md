@@ -13,6 +13,74 @@ The School of AI - END3 Course, Session 6 Assignment
 
 Please remember that the objective of this assignment is to learn how to write code step by steps, so I should be seeing your exploration steps.
 
+## Results Summary
+
+- Question Answer Dataset [Notebook](Q&A_Implementation_using_Seq2Seq_and_attention.ipynb) : Test Accuracy = 
+- Quora Dataset [Notebook](Quora-similarity.ipynb) : Test Accuracy = 
+
+## Data Preparation - Question Answer
+```Python
+def readFile(input_name, output_name):
+    pairs = []
+
+    # Read the file and split into lines
+    base_dir = '/content/Question_Answer_Dataset_v1.2/'
+    folder_names = ['S08/', 'S09/', 'S10/']
+    file_name = 'question_answer_pairs.txt'
+    
+    for folder_name in folder_names:
+      print("Reading lines: ", folder_name)
+      lines = open(
+        base_dir + folder_name + file_name,
+        encoding='utf-8',
+        errors='ignore'
+      ).read().strip().split('\n')
+
+      # Split every line into pairs and normalize
+      pairs.extend(
+          [[normalizeString(s) for s in l.split('\t')[1:3]] for l in lines[1:]]
+      )
+
+    input_question = Lang(input_name)
+    output_answer = Lang(output_name)
+
+    return input_question, output_answer, pairs
+```
+
+## Data Preparation - Quora
+```Python
+df = pd.read_csv("/content/quora_duplicate_questions.tsv", sep='\t')
+df = df[df['is_duplicate'] ==1]
+df['input'] = df["question1"] + '\t' + df["question2"]
+li = df['input'].to_list()
+
+with open('eng-eng.txt', 'w') as f:
+  for i in li:
+    f.write(i)
+    f.write('\n')
+
+def readLangs(lang1, lang2, reverse=False):
+    print("Reading lines...")
+
+    # Read the file and split into lines
+    lines = open('/content/%s-%s.txt' % (lang1, lang2), encoding='utf-8').\
+        read().strip().split('\n')
+
+    # Split every line into pairs and normalize
+    pairs = [[normalizeString(s) for s in l.split('\t')] for l in lines]
+
+    # Reverse pairs, make Lang instances
+    if reverse:
+        pairs = [list(reversed(p)) for p in pairs]
+        input_lang = Lang(lang2)
+        output_lang = Lang(lang1)
+    else:
+        input_lang = Lang(lang1)
+        output_lang = Lang(lang2)
+
+    return input_lang, output_lang, pairs
+
+```
 
 ## QUESTION-ANSWER DATASET
 Manually-generated factoid question/answer pairs with difficulty ratings from Wikipedia articles. Dataset includes articles, questions, and answers.
@@ -34,7 +102,7 @@ Manually-generated factoid question/answer pairs with difficulty ratings from Wi
 
 - Abraham\_Lincoln Who suggested Lincoln grow a beard? Grace Bedell. hard medium data/set3/a4
 
-What’s a Seq2Seq Model?
+## What’s a Seq2Seq Model?
 
 A Seq2Seq model is a model that takes a sequence of items (words, letters, time series, etc) and outputs another sequence of items.
 
