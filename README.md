@@ -16,7 +16,7 @@ Please remember that the objective of this assignment is to learn how to write c
 ## Results Summary
 
 - Question Answer Dataset [Notebook](Q&A_Implementation_using_Seq2Seq_and_attention.ipynb) : Training Accuracy = 90% (9/10 Questions answered correctly)
-- Quora Dataset [Notebook](Quora-similarity.ipynb) : Training Accuracy = 
+- Quora Dataset [Notebook](Quora-similarity.ipynb) : Training Accuracy = 70%
 
 ## Data Preparation - Question Answer
 ```Python
